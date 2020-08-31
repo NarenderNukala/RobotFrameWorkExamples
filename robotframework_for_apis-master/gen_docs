@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+this_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+
+# Get widdershins (spec->markdown) and shins (markdown->HTML)
+
+which git >/dev/null && git submodule update --init --recursive
+
+
+# Generate Markdown doc
+
+npm install --prefix "$this_path/widdershins" --no-save
+
+"$this_path/widdershins/widdershins.js" \
+  "$this_path/tests/contract.json" \
+  -o "$this_path/docs/README.md" # --language_tabs "shell:curl"
+
+
+# Generate HTML doc
+
+npm install --prefix "$this_path/shins" --no-save
+
+"$this_path/shins/shins.js" "$this_path/docs/README.md" \
+  --output "$this_path/docs/index.html"
+
+cp -R "$this_path/shins/pub" "$this_path/docs/pub"
+cp -R "$this_path/shins/source" "$this_path/docs/source"
+
+
+# Open HTML doc
+
+open "$this_path/docs/index.html"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../amazon/.idea/amazon.iml" filepath="$PROJECT_DIR$/../amazon/.idea/amazon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../conditionals-new/.idea/conditionals.iml" filepath="$PROJECT_DIR$/../conditionals-new/.idea/conditionals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/first-script.iml" filepath="$PROJECT_DIR$/.idea/first-script.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../front-office/.idea/front-office-1.iml" filepath="$PROJECT_DIR$/../front-office/.idea/front-office-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../dictionary - urls/.idea/imb.iml" filepath="$PROJECT_DIR$/../dictionary - urls/.idea/imb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../explore-libraries/.idea/intro.iml" filepath="$PROJECT_DIR$/../explore-libraries/.idea/intro.iml" />
+    </modules>
+  </component>
+</project>

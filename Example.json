@@ -1,0 +1,22 @@
+{
+	"firstName": "Naren",
+	"lastName": "Nukala",
+	"age": "25",
+	"address": 
+	{
+		"streetAddress": "Road Num 2",
+		"city": "Hyderabad",
+		"state": "TG",
+		"postalCode": "500098"
+	},
+	"phoneNumber": [
+		{
+			"type": "home",
+			"number": "9884746423"
+		},
+		{
+			"type": "mobile",
+			"number": "9882546423"
+		}
+	]
+}

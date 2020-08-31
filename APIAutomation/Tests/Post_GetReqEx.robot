@@ -6,6 +6,9 @@ Library    Collections
 ${base_url}     http://restapi.demoqa.com
 ${city}         Hyderabad
 
+#https://jsonpathfinder.com/
+#http://jsonpath.com/
+
 *** Test Cases ***
 Post Req Customer Registration
     create session      myPostSession   ${base_url}/customer

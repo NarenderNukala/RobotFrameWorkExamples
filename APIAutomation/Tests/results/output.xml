@@ -1,139 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.2.1 (Python 3.6.5 on win32)" generated="20200831 17:11:24.162" rpa="false">
-<suite id="s1" name="xmlResponseValidation" source="F:\RobotScripts\APIAutomation\Tests\xmlResponseValidation.robot">
-<test id="s1-t1" name="xml Response Validation">
+<robot generator="Robot 3.2.1 (Python 3.6.5 on win32)" generated="20200831 21:40:30.645" rpa="false">
+<suite id="s1" name="PostReqEx" source="F:\RobotScripts\APIAutomation\Tests\PostReqEx.robot">
+<test id="s1-t1" name="Creating new resource">
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
-<arg>mySession</arg>
+<arg>addData</arg>
 <arg>${baseURL}</arg>
 </arguments>
-<msg timestamp="20200831 17:11:24.323" level="INFO">Creating Session using : alias=mySession, url=http://thomas-bayer.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20200831 17:11:24.322" endtime="20200831 17:11:24.323"></status>
+<msg timestamp="20200831 21:40:30.875" level="INFO">Creating Session using : alias=addData, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200831 21:40:30.875" endtime="20200831 21:40:30.875"></status>
 </kw>
-<kw name="Get Request" library="RequestsLibrary">
-<doc>Send a GET request on the session object found using the
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=Testing</arg>
+<arg>middle_name=A</arg>
+<arg>last_name=World</arg>
+<arg>date_of_birth=12/12/1990</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20200831 21:40:30.877" level="INFO">${body} = {'first_name': 'Testing', 'middle_name': 'A', 'last_name': 'World', 'date_of_birth': '12/12/1990'}</msg>
+<status status="PASS" starttime="20200831 21:40:30.876" endtime="20200831 21:40:30.877"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${headers}</var>
+</assign>
+<msg timestamp="20200831 21:40:30.878" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20200831 21:40:30.877" endtime="20200831 21:40:30.878"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
 given `alias`</doc>
 <arguments>
-<arg>mysession</arg>
-<arg>/sqlrest/CUSTOMER/15</arg>
+<arg>addData</arg>
+<arg>/api/studentsDetails</arg>
+<arg>data=${body}</arg>
+<arg>headers=${headers}</arg>
 </arguments>
 <assign>
 <var>${response}</var>
 </assign>
-<msg timestamp="20200831 17:11:24.704" level="INFO">GET Request : url=http://thomas-bayer.com/sqlrest/CUSTOMER/15 
- path_url=/sqlrest/CUSTOMER/15 
- headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
+<msg timestamp="20200831 21:40:30.920" level="INFO">POST Request : url=http://thetestingworldapi.com//api/studentsDetails 
+ path_url=//api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '98'} 
+ body={"first_name": "Testing", "middle_name": "A", "last_name": "World", "date_of_birth": "12/12/1990"} 
  </msg>
-<msg timestamp="20200831 17:11:24.705" level="INFO">GET Response : url=http://thomas-bayer.com/sqlrest/CUSTOMER/15 
- status=200, reason=OK 
- body=&lt;?xml version="1.0" standalone="no"?&gt;&lt;CUSTOMER xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
-    &lt;ID&gt;15&lt;/ID&gt;
-    &lt;FIRSTNAME&gt;Bill&lt;/FIRSTNAME&gt;
-    &lt;LASTNAME&gt;Clancy&lt;/LASTNAME&gt;
-    &lt;STREET&gt;319 Upland Pl.&lt;/STREET&gt;
-    &lt;CITY&gt;Seattle&lt;/CITY&gt;
-&lt;/CUSTOMER&gt; 
+<msg timestamp="20200831 21:40:30.920" level="INFO">POST Response : url=http://thetestingworldapi.com//api/studentsDetails 
+ status=201, reason=Created 
+ body={"id":68244,"first_name":"Testing","middle_name":"A","last_name":"World","date_of_birth":"12/12/1990"} 
  </msg>
-<msg timestamp="20200831 17:11:24.706" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20200831 17:11:24.324" endtime="20200831 17:11:24.706"></status>
+<msg timestamp="20200831 21:40:30.921" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20200831 21:40:30.878" endtime="20200831 21:40:30.921"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20200831 21:40:30.921" endtime="20200831 21:40:30.922"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" starttime="20200831 21:40:30.922" endtime="20200831 21:40:30.923"></status>
 </kw>
 <kw name="Convert To String" library="BuiltIn">
 <doc>Converts the given item to a Unicode string.</doc>
 <arguments>
-<arg>${response.content}</arg>
+<arg>${response.status_code}</arg>
 </arguments>
 <assign>
-<var>${xml_string}</var>
+<var>${code}</var>
 </assign>
-<msg timestamp="20200831 17:11:24.710" level="INFO">${xml_string} = &lt;?xml version="1.0" standalone="no"?&gt;&lt;CUSTOMER xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
-    &lt;ID&gt;15&lt;/ID&gt;
-    &lt;FIRSTNAME&gt;Bill&lt;/FIRSTNAME&gt;
-    &lt;LASTNAME&gt;Clancy&lt;/LASTNAME&gt;
-    &lt;STREET&gt;319 Upland Pl.&lt;/S...</msg>
-<status status="PASS" starttime="20200831 17:11:24.708" endtime="20200831 17:11:24.710"></status>
-</kw>
-<kw name="Parse Xml" library="XML">
-<doc>Parses the given XML file or string into an element structure.</doc>
-<arguments>
-<arg>${xml_string}</arg>
-</arguments>
-<assign>
-<var>${xml_obj}</var>
-</assign>
-<msg timestamp="20200831 17:11:24.714" level="INFO">${xml_obj} = &lt;Element 'CUSTOMER' at 0x0000025F8C3FAC78&gt;</msg>
-<status status="PASS" starttime="20200831 17:11:24.711" endtime="20200831 17:11:24.715"></status>
-</kw>
-<kw name="Element Text Should Be" library="XML">
-<doc>Verifies that the text of the specified element is ``expected``.</doc>
-<arguments>
-<arg>${xml_obj}</arg>
-<arg>15</arg>
-<arg>.//ID</arg>
-</arguments>
-<status status="PASS" starttime="20200831 17:11:24.716" endtime="20200831 17:11:24.717"></status>
-</kw>
-<kw name="Get Child Elements" library="XML">
-<doc>Returns the child elements of the specified element as a list.</doc>
-<arguments>
-<arg>${xml_obj}</arg>
-</arguments>
-<assign>
-<var>${child_elements}</var>
-</assign>
-<msg timestamp="20200831 17:11:24.719" level="INFO">${child_elements} = [&lt;Element 'ID' at 0x0000025F8C3FABD8&gt;, &lt;Element 'FIRSTNAME' at 0x0000025F8C3FAC28&gt;, &lt;Element 'LASTNAME' at 0x0000025F8C3FACC8&gt;, &lt;Element 'STREET' at 0x0000025F8C3FAD18&gt;, &lt;Element 'CITY' at 0x0000025F8...</msg>
-<status status="PASS" starttime="20200831 17:11:24.718" endtime="20200831 17:11:24.719"></status>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<doc>Verifies that the given item is not empty.</doc>
-<arguments>
-<arg>${child_elements}</arg>
-</arguments>
-<msg timestamp="20200831 17:11:24.720" level="INFO">Length is 5</msg>
-<status status="PASS" starttime="20200831 17:11:24.720" endtime="20200831 17:11:24.721"></status>
-</kw>
-<kw name="Get Element Text" library="XML">
-<doc>Returns all text of the element, possibly whitespace normalized.</doc>
-<arguments>
-<arg>${child_elements[0]}</arg>
-</arguments>
-<assign>
-<var>${id}</var>
-</assign>
-<msg timestamp="20200831 17:11:24.722" level="INFO">${id} = 15</msg>
-<status status="PASS" starttime="20200831 17:11:24.721" endtime="20200831 17:11:24.722"></status>
-</kw>
-<kw name="Get Element Text" library="XML">
-<doc>Returns all text of the element, possibly whitespace normalized.</doc>
-<arguments>
-<arg>${child_elements[1]}</arg>
-</arguments>
-<assign>
-<var>${fname}</var>
-</assign>
-<msg timestamp="20200831 17:11:24.724" level="INFO">${fname} = Bill</msg>
-<status status="PASS" starttime="20200831 17:11:24.723" endtime="20200831 17:11:24.724"></status>
+<msg timestamp="20200831 21:40:30.924" level="INFO">${code} = 201</msg>
+<status status="PASS" starttime="20200831 21:40:30.923" endtime="20200831 21:40:30.924"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
 <arguments>
-<arg>${id}</arg>
-<arg>15</arg>
+<arg>${code}</arg>
+<arg>201</arg>
 </arguments>
-<status status="PASS" starttime="20200831 17:11:24.725" endtime="20200831 17:11:24.726"></status>
+<status status="PASS" starttime="20200831 21:40:30.924" endtime="20200831 21:40:30.924"></status>
 </kw>
-<kw name="Should Be Equal" library="BuiltIn">
-<doc>Fails if the given objects are unequal.</doc>
-<arguments>
-<arg>${fname}</arg>
-<arg>Bill</arg>
-</arguments>
-<status status="PASS" starttime="20200831 17:11:24.726" endtime="20200831 17:11:24.727"></status>
-</kw>
-<status status="PASS" starttime="20200831 17:11:24.322" endtime="20200831 17:11:24.728" critical="yes"></status>
+<status status="PASS" starttime="20200831 21:40:30.874" endtime="20200831 21:40:30.925" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20200831 17:11:24.163" endtime="20200831 17:11:24.730"></status>
+<status status="PASS" starttime="20200831 21:40:30.647" endtime="20200831 21:40:30.926"></status>
 </suite>
 <statistics>
 <total>
@@ -143,7 +105,7 @@ given `alias`</doc>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="xmlResponseValidation">xmlResponseValidation</stat>
+<stat pass="1" fail="0" id="s1" name="PostReqEx">PostReqEx</stat>
 </suite>
 </statistics>
 <errors>
